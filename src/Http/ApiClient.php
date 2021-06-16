@@ -90,6 +90,10 @@ class ApiClient extends GuzzleClient
         }
         // always pass preferred API version as header. not currently in service description
         $clientConfig['headers']['X-Api-Version'] = $config['version'];
+        // pass SSL certificate verification behavior to guzzl http client
+        if (isset($config['verifySSL']) === true) {
+            $clientConfig[\GuzzleHttp\RequestOptions::VERIFY] = $config['verifySSL'];
+        }
         // Create a new HTTP Client
         $client = new Client($clientConfig);
 
